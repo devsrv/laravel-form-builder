@@ -15,8 +15,8 @@ class App extends Component {
 	render() {
 		return (
 			<div style={{ display: 'flex', justifyContent: 'stretch', marginTop: '50px', marginRight: '50px' }}>
+				<Board />
 				<Pallet />
-				<Board />    
 			</div>
 		);
 	}
