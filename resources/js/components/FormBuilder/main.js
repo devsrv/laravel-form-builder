@@ -6,6 +6,8 @@ import ReactDOM from 'react-dom';
 import Pallet from './pallet';
 import Board from './board';
 
+import './../../../css/builder.css';
+
 class App extends Component {
 	constructor() {
 		super();
