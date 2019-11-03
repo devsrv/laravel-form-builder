@@ -109,16 +109,20 @@
     height: 80vh;
   }
   
-  .draggable-item{
-    height: 50px;
-    line-height: 50px;
-    text-align: center;
-    display: block;
-    background-color: #fff;
-    outline: 0;
-    border: 1px solid rgba(0,0,0,.125);
-    margin-bottom: 2px;
+  .draggable-pallet-item{
+    background-color: #212529;
+    border: 1px solid #212529;
+    padding: 26px 26px 0px;
+    margin-bottom: 25px;
     margin-top: 2px;
+  }
+
+  .draggable-board-item{
+    padding: 26px 26px 0px;
+  }
+
+  div.smooth-dnd-container.vertical{
+    width: 100%;
   }
   
   .draggable-item-horizontal{
@@ -264,7 +268,6 @@
     /* border: 1px solid #ccc; */
     background-color: white;
     box-shadow: 0 1px 1px rgba(0,0,0,0.12), 0 1px 1px rgba(0,0,0,0.24);
-    padding: 10px;
   }
   
   .card-column-header{
@@ -291,7 +294,7 @@
     opacity: 0.8;
     cursor: ns-resize;
     /* transform: rotateZ(5deg); */
-    background-color: cornflowerblue;
+    background-color: rgb(9, 26, 59);
     box-shadow: 3px 3px 10px 3px rgba(0,0,0,0.3);
     cursor: ns-resize;
   }
