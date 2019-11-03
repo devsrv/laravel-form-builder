@@ -17,12 +17,13 @@ export default class Pallet extends Component {
   render() {
     return (
         <div className="d-flex ml-3">
-			<Container groupName="1" behaviour="copy" getChildPayload={i => this.state.items1[i]} onDrop={e => this.setState({ items1: applyDrag(this.state.items1, e) })}>
+			<Container groupName="1" dragHandleSelector=".column-drag-handle" dragClass="opacity-ghost" dropClass="opacity-ghost-drop" behaviour="copy" getChildPayload={i => this.state.items1[i]} onDrop={e => this.setState({ items1: applyDrag(this.state.items1, e) })}>
 			{
 				this.state.items1.map((p,i) => {
 					return (
 						<Draggable key={i}>
 							<div className="draggable-item">
+								<span className="column-drag-handle" style={{float:'left', padding:'0 10px'}}>&#x2630;</span>
 								{p.data}
 							</div>
 						</Draggable>
