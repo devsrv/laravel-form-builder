@@ -14,12 +14,15 @@ class App extends Component {
 
 		this.state = {}
 	}
+
 	render() {
+		const Fragment = React.Fragment;
+
 		return (
-			<div style={{ display: 'flex', justifyContent: 'stretch', marginTop: '50px', marginRight: '50px' }}>
+			<Fragment>
 				<Board />
 				<Pallet />
-			</div>
+			</Fragment>
 		);
 	}
 }
