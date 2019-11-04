@@ -25,12 +25,14 @@ export class TheField extends Component {
 		this.props.onUserAction(payload);
 	}
 
-	generatedField = (field) => {
+	generatedField = (field, isBoard) => {
 		let fieldMarkup, label, helpText;
+		let fieldClass = isBoard? "form-control" : "form-control bg-secondary";
 
 		switch (field.type) {
 			case "select":
-				fieldMarkup = <select value="0" className="custom-select">
+				fieldClass = isBoard? "custom-select" : "custom-select bg-secondary text-white";
+				fieldMarkup = <select value="0" className={fieldClass}>
 								<option value="0">choose...</option>
 							</select>;
 
@@ -40,7 +42,7 @@ export class TheField extends Component {
 				break;
 		
 			case "textarea":
-				fieldMarkup = <textarea className="form-control"></textarea>;
+				fieldMarkup = <textarea className={fieldClass}></textarea>;
 
 				label = "Textarea";
 				helpText = "defines a multi-line input field";
@@ -48,7 +50,7 @@ export class TheField extends Component {
 				break;
 		
 			default:
-				fieldMarkup = <input type="email" className="form-control" aria-describedby={`palletInputHelp${field.id}`} placeholder="" />;
+				fieldMarkup = <input type="email" className={fieldClass} aria-describedby={`palletInputHelp${field.id}`} placeholder="" />;
 
 				label = "Input field";
 				helpText = "used for normal text input, email or phone number field";
@@ -61,7 +63,7 @@ export class TheField extends Component {
 
 	render() {
 		const { isBoard, field } = this.props;
-		const { fieldMarkup, label, helpText } = this.generatedField(field);
+		const { fieldMarkup, label, helpText } = this.generatedField(field, isBoard);
 
 		return (
 			<div className="form-group">
