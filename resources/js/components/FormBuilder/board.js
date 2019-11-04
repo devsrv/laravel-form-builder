@@ -23,9 +23,9 @@ export default class Board extends Component {
                         <div className="d-flex justify-content-start">
                             <Container groupName="1" lockAxis="y" dragHandleSelector=".column-drag-handle" getChildPayload={i => this.state.fields[i]} onDrop={e => this.setState({ fields: applyDrag(this.state.fields, e) })}>
                             {
-                                this.state.fields.map((fld, i) => {
+                                this.state.fields.map((fld) => {
                                     return (
-                                        <Draggable key={i}>
+                                        <Draggable key={fld.id}>
                                             <div className="draggable-board-item">
                                                 <span className="column-drag-handle" style={{float:'left', padding:'0 10px'}}>&#x2630;</span>
                                                 {<TheField field={fld} isBoard={true} />}
