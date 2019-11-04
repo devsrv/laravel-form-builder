@@ -10,8 +10,9 @@ export default class Pallet extends Component {
 		this.state = {
 			fields: [
 				{ id: 1, type: 'input', label: 'Input field', isRequired: false, additionalConfig: {inputType: 'text'} },
-				{ id: 2, type: 'select', label: 'Drop-down list', isRequired: false, additionalConfig: {listOptions: []} },
-				{ id: 3, type: 'textarea', label: 'Textarea', isRequired: false, additionalConfig: {textAreaRows: 3} }
+				{ id: 2, type: 'date', label: 'Date field', isRequired: false, additionalConfig: {} },
+				{ id: 3, type: 'select', label: 'Drop-down list', isRequired: false, additionalConfig: {listOptions: []} },
+				{ id: 4, type: 'textarea', label: 'Textarea', isRequired: false, additionalConfig: {textAreaRows: 3} }
 			]
 		}
 	}

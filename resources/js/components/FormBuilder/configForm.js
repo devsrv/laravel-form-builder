@@ -119,6 +119,10 @@ export default class ConfigForm extends Component {
                 additionalConfig = {textAreaRows};
                 break;
         
+            case "date":
+                additionalConfig = {};
+                break;
+        
             default:
                 additionalConfig = {inputType};
                 break;
@@ -146,6 +150,11 @@ export default class ConfigForm extends Component {
 
             case "textarea":
                 extraConfigs = <TextareaRows onRowsChange={this.handleRowsChange} currRows={this.state.textAreaRows} />
+                
+                break;
+        
+            case "date":
+                extraConfigs = null;
                 
                 break;
         
@@ -181,7 +190,7 @@ export default class ConfigForm extends Component {
                 <div className="form-group">
                     <div className="custom-control custom-checkbox mr-sm-2">
                         <input type="checkbox" className="custom-control-input" id="rule-required" checked={this.state.isRequired} onChange={this.handleRequiredChange} />
-                        <label className="custom-control-label" for="rule-required">Required</label>
+                        <label className="custom-control-label" htmlFor="rule-required">Required</label>
                     </div>
                 </div>
 

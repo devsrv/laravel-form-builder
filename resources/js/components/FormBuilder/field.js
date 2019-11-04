@@ -55,6 +55,13 @@ export class TheField extends Component {
 	
 				break;
 		
+			case "date":
+				fieldClass = isBoard? "form-control" : "form-control bg-secondary text-white";
+				fieldMarkup = <input type="date" className={fieldClass} aria-describedby={`palletDateHelp${field.id}`} placeholder="" />;
+				helpText = "used for date input- resulting value includes the year, month, and day";
+	
+				break;
+		
 			default:
 				fieldMarkup = <input type="email" className={fieldClass} aria-describedby={`palletInputHelp${field.id}`} placeholder="" />;
 				helpText = "used for normal text input, email or phone number field";
@@ -71,13 +78,13 @@ export class TheField extends Component {
 
 		return (
 			<div className="form-group">
-				<label className={isBoard ? "d-flex justify-content-between align-items-center" : ""}>
+				<div className={isBoard ? "d-flex justify-content-between align-items-start pb-2" : ""}>
 					<span>{label}</span>
 
 					{isBoard && 
 						<FieldControls field={field} onBtnClick={this.handleFldControlClick} />
 					} 
-				</label>
+				</div>
 
 				{fieldMarkup}
 
