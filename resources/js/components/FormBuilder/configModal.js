@@ -28,6 +28,14 @@ export class Modal extends Component {
 }
 
 export class ModalBody extends Component {
+	handleModalCloseClick = () => {
+		this.props.onCloseClick();
+	}
+
+	handleConfigSubmit = (data) => {
+		this.props.onConfigSubmit(data);
+	}
+
 	render() {
 		const { show, field } = this.props;
 
@@ -37,17 +45,17 @@ export class ModalBody extends Component {
 					<div className="modal-content rav_modal-content">
 						<div className="modal-header">
 							<h5 className="modal-title">Configure</h5>
-							<button type="button" className="close" onClick={() => this.props.onCloseClick()} aria-label="Close">
+							<button type="button" className="close" onClick={this.handleModalCloseClick} aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
 						</div>
-						<div className="modal-body">
-							<ConfigForm field={field} show={show}/>
-						</div>
-						<div className="modal-footer">
-							<button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={() => this.props.onCloseClick()}>Close</button>
-							<button type="button" className="btn btn-primary">Save Field</button>
-						</div>
+
+						<ConfigForm 
+							field={field} 
+							show={show} 
+							onCloseClick={this.handleModalCloseClick} 
+							onConfigSubmit={this.handleConfigSubmit}
+						/>
 					</div>
 				</div>
 			</div>
