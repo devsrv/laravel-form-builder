@@ -12,12 +12,16 @@ class DropdownOptions extends Component {
 }
 
 class TextareaRows extends Component {
+    handleChange = (e) => {
+        this.props.onRowsChange(e.target.value);
+    }
+
     render() {
         return (
             <div className="form-group row">
                 <label htmlFor="no-rows" className="col-sm-4 col-form-label">Number of rows</label>
                 <div class="col-sm-6">
-                    <input type="number" className="form-control" id="no-rows" />
+                    <input type="number" min="1" className="form-control" id="no-rows" value={this.props.currRows} onChange={this.handleChange} />
                 </div>
             </div>
         )
@@ -88,6 +92,10 @@ export default class ConfigForm extends Component {
         this.setState({inputType: type});
     }
 
+    handleRowsChange = (rows) => {
+        this.setState({textAreaRows: rows});
+    }
+
     handleFormSubmit = (id, e) => {
         const {label, isRequired, inputType, textAreaRows, listOptions} = this.state;
         let additionalConfig;
@@ -127,7 +135,7 @@ export default class ConfigForm extends Component {
                 break;
 
             case "textarea":
-                extraConfigs = <TextareaRows />
+                extraConfigs = <TextareaRows onRowsChange={this.handleRowsChange} currRows={this.state.textAreaRows} />
                 
                 break;
         
