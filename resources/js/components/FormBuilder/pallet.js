@@ -11,7 +11,7 @@ export default class Pallet extends Component {
 			fields: [
 				{ id: 1, type: 'input', label: 'Input field', isRequired: false, additionalConfig: {inputType: 'text'} },
 				{ id: 2, type: 'select', label: 'Drop-down list', isRequired: false, additionalConfig: {listOptions: []} },
-				{ id: 3, type: 'textarea', label: 'Textarea', isRequired: false, additionalConfig: {textAreaRows: 4} }
+				{ id: 3, type: 'textarea', label: 'Textarea', isRequired: false, additionalConfig: {textAreaRows: 3} }
 			]
 		}
 	}

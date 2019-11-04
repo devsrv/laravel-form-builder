@@ -62,7 +62,7 @@ export default class ConfigForm extends Component {
         allowDataFill: true,
         inputType: "text",
         listOptions: "",
-        textAreaRows: 4
+        textAreaRows: 3
     }
 
     static getDerivedStateFromProps(props, state) {

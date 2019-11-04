@@ -50,7 +50,7 @@ export class TheField extends Component {
 				break;
 		
 			case "textarea":
-				fieldMarkup = <textarea className={fieldClass}></textarea>;
+				fieldMarkup = <textarea className={fieldClass} rows={field.additionalConfig.textAreaRows}></textarea>;
 				helpText = "defines a multi-line input field";
 	
 				break;
