@@ -1,10 +1,11 @@
 import React, { Component }  from 'react';
+require('lodash.uniqueid');
 
 class FieldControls extends Component{
 	render() {
 		return (
 			<span>
-				<button className="btn btn-light btn-sm" type="button" onClick={() => console.log('config')}>
+				<button className="btn btn-light btn-sm" type="button" onClick={() => console.log(_.uniqueId('contact_'))}>
 					<i className="fa fa-wrench"></i>
 				</button> 
 

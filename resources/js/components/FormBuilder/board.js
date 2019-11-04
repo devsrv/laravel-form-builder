@@ -9,9 +9,7 @@ export default class Board extends Component {
 
         this.state = {
             fields: [
-                { id: 1, type: 'input' },
-				{ id: 2, type: 'select' },
-				{ id: 3, type: 'textarea' }
+                
             ]
         }
     }

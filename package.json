@@ -19,6 +19,7 @@
         "jquery": "^3.2",
         "laravel-mix": "^4.1.4",
         "lodash": "^4.17.13",
+        "lodash.uniqueid": "^4.0.1",
         "popper.js": "^1.12",
         "react": "^16.11.0",
         "react-dom": "^16.11.0",
