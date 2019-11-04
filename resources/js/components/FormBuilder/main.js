@@ -2,6 +2,7 @@ require('./../../bootstrap');
 
 import React, { Component }  from 'react';
 import ReactDOM from 'react-dom';
+import ErrorBoundary from './../ErrorBoundary';
 
 import Pallet from './pallet';
 import Board from './board';
@@ -16,13 +17,11 @@ class App extends Component {
 	}
 
 	render() {
-		const Fragment = React.Fragment;
-
 		return (
-			<Fragment>
+			<ErrorBoundary>
 				<Board />
 				<Pallet />
-			</Fragment>
+			</ErrorBoundary>
 		);
 	}
 }
