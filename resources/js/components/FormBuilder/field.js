@@ -26,8 +26,9 @@ export class TheField extends Component {
 	}
 
 	generatedField = (field, isBoard) => {
-		let fieldMarkup, label, helpText;
+		let fieldMarkup, helpText;
 		let fieldClass = isBoard? "form-control" : "form-control bg-secondary";
+		let label = field.label;
 
 		switch (field.type) {
 			case "select":
@@ -35,24 +36,18 @@ export class TheField extends Component {
 				fieldMarkup = <select value="0" className={fieldClass}>
 								<option value="0">choose...</option>
 							</select>;
-
-				label = "Drop-down list";
 				helpText = "allow the user to select an option from the drop-down list";
 	
 				break;
 		
 			case "textarea":
 				fieldMarkup = <textarea className={fieldClass}></textarea>;
-
-				label = "Textarea";
 				helpText = "defines a multi-line input field";
 	
 				break;
 		
 			default:
 				fieldMarkup = <input type="email" className={fieldClass} aria-describedby={`palletInputHelp${field.id}`} placeholder="" />;
-
-				label = "Input field";
 				helpText = "used for normal text input, email or phone number field";
 	
 				break;

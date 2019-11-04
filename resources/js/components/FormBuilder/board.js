@@ -46,6 +46,22 @@ export default class Board extends Component {
         this.setState({showConfigModal: false, currConfigField: null});
     }
 
+    handleConfigSubmit = (data) => {
+        const { id, payload } = data;
+        
+        const fieldIndex = this.state.fields.findIndex(f => {
+            return f.id === id.toString();
+        });
+
+        this.setState({
+            fields: [
+                ...this.state.fields.slice(0, fieldIndex),
+                Object.assign({}, this.state.fields[fieldIndex], { ...payload }),
+                ...this.state.fields.slice(fieldIndex + 1)
+            ]
+        });
+	}
+
     render() {
         return (
             <div className="col">
@@ -76,6 +92,7 @@ export default class Board extends Component {
                                 show={this.state.showConfigModal}
                                 field={this.state.currConfigField}
                                 onCloseClick={this.handleModalCloseAttempt} 
+                                onConfigSubmit={this.handleConfigSubmit}
                             />
                         </Modal>
                     </div>
