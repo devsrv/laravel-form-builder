@@ -8,6 +8,8 @@
     <div class="section">
         {{-- react app root --}}
         <div class="row" id="builder-app"></div>
+
+        <div id="modal-root"></div>
     </div>
 
     {{-- form element reference --}}

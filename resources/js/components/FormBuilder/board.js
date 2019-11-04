@@ -2,16 +2,12 @@ import React, { Component }  from 'react';
 import { Container, Draggable } from 'react-smooth-dnd';
 import { applyDrag } from './utils';
 import { TheField } from './field';
+import { Modal, ModalBody } from './configModal';
 
 export default class Board extends Component {
-    constructor() {
-        super();
-
-        this.state = {
-            fields: [
-                
-            ]
-        }
+    state = {
+        fields: [],
+        showConfigModal: false
     }
 
     // handle user click field config / remove field
@@ -20,6 +16,7 @@ export default class Board extends Component {
 
         switch (payload.trigger) {
             case "SHOW_CONFIG_MODAL":
+                this.setState({showConfigModal: true});
                 console.log('modal show', id);
                 break;
         
@@ -38,6 +35,15 @@ export default class Board extends Component {
 
                 break;
         }
+    }
+
+    // handle all click events of the modal body content
+    handleClick = (e) => {
+        if(e.target.className == "rav_modal") this.handleModalCloseAttempt();
+    }
+
+    handleModalCloseAttempt = () => {
+        this.setState({showConfigModal: false});
     }
 
     render() {
@@ -62,6 +68,16 @@ export default class Board extends Component {
                             }
                             </Container>
                         </div>       
+                    </div>
+
+                    <div onClick={this.handleClick}>
+                        <Modal>
+                            <ModalBody 
+                                show={this.state.showConfigModal}
+                                fname="Sourav" 
+                                onCloseClick={this.handleModalCloseAttempt} 
+                            />
+                        </Modal>
                     </div>
                 </div>
             </div>      
