@@ -6,21 +6,42 @@ import ErrorBoundary from './../ErrorBoundary';
 
 import Pallet from './pallet';
 import Board from './board';
+import SaveBtnArea from './builderBottom';
 
 import './../../../css/builder.css';
 
 class App extends Component {
-	constructor() {
-		super();
+	state = {
+		showSuccess: false,
+		saveForm: false
+	}
 
-		this.state = {}
+	handleFormSave = () => {
+		this.setState({saveForm: true, showSuccess: false});
+	}
+
+	handleMsgBoxClose = () => {
+		this.setState({showSuccess: false});
+	}
+
+	handleSaveSuccess = (payload) => {
+		// ajax here
+		console.log(payload);
+		
+		this.setState({showSuccess: true, saveForm: false});
 	}
 
 	render() {
 		return (
 			<ErrorBoundary>
-				<Board />
+				<Board initSave={this.state.saveForm} onSaveSuccess={this.handleSaveSuccess} />
 				<Pallet />
+
+				<SaveBtnArea 
+					onFormSave={this.handleFormSave} 
+					showSuccess={this.state.showSuccess} 
+					onMsgBoxClose={this.handleMsgBoxClose}
+				/>
 			</ErrorBoundary>
 		);
 	}

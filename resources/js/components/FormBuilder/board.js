@@ -11,6 +11,15 @@ export default class Board extends Component {
         currConfigField: null
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        if(prevProps.initSave != this.props.initSave) {
+            if(this.props.initSave) {
+                this.props.onSaveSuccess(this.state.fields);
+                this.setState({ fields: [] });
+            }
+        }
+    }
+
     // handle user click field config / remove field
     handleAction = (payload) => {
         const { id, type } = payload.field;
