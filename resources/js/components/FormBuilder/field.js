@@ -3,13 +3,15 @@ require('lodash.uniqueid');
 
 class FieldControls extends Component{
 	render() {
+		const { field, onBtnClick } = this.props;
+
 		return (
 			<span>
-				<button className="btn btn-light btn-sm" type="button" onClick={() => console.log(_.uniqueId('contact_'))}>
+				<button className="btn btn-light btn-sm" type="button" onClick={ () => onBtnClick({ trigger: "SHOW_CONFIG_MODAL", field }) }>
 					<i className="fa fa-wrench"></i>
 				</button> 
 
-				<button className="btn btn-light text-danger btn-sm ml-3" type="button" onClick={() => console.log('delete')}>
+				<button className="btn btn-light text-danger btn-sm ml-3" type="button" onClick={ () => onBtnClick({ trigger: "REMOVE_FIELD", field }) }>
 					<i className="fa fa-times-circle"></i>
 				</button>
 			</span>
@@ -18,6 +20,10 @@ class FieldControls extends Component{
 }
 
 export class TheField extends Component {
+
+	handleFldControlClick = (payload) => {
+		this.props.onUserAction(payload);
+	}
 
 	generatedField = (field) => {
 		let fieldMarkup, label, helpText;
@@ -61,7 +67,10 @@ export class TheField extends Component {
 			<div className="form-group">
 				<label className={isBoard ? "d-flex justify-content-between align-items-center" : ""}>
 					<span>{label}</span>
-					{isBoard && <FieldControls />} 
+
+					{isBoard && 
+						<FieldControls field={field} onBtnClick={this.handleFldControlClick} />
+					} 
 				</label>
 
 				{fieldMarkup}

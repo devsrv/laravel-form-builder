@@ -14,6 +14,21 @@ export default class Board extends Component {
         }
     }
 
+    // handle user click field config / remove field
+    handleAction = (payload) => {
+        const { id, type } = payload.field;
+
+        switch (payload.trigger) {
+            case "SHOW_CONFIG_MODAL":
+                console.log('modal show', id);
+                break;
+        
+            default:
+                console.log('remove', id);
+                break;
+        }
+    }
+
     render() {
         return (
             <div className="col">
@@ -28,7 +43,7 @@ export default class Board extends Component {
                                         <Draggable key={fld.id}>
                                             <div className="draggable-board-item">
                                                 <span className="column-drag-handle" style={{float:'left', padding:'0 10px'}}>&#x2630;</span>
-                                                {<TheField field={fld} isBoard={true} />}
+                                                {<TheField field={fld} isBoard={true} onUserAction={this.handleAction} />}
                                             </div>
                                         </Draggable>
                                     );
