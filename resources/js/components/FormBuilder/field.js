@@ -33,8 +33,17 @@ export class TheField extends Component {
 		switch (field.type) {
 			case "select":
 				fieldClass = isBoard? "custom-select" : "custom-select bg-secondary text-white";
-				fieldMarkup = <select value="0" className={fieldClass}>
-								<option value="0">choose...</option>
+				fieldMarkup = <select className={fieldClass}>
+								{
+									isBoard ?
+									field.additionalConfig.listOptions.map((opt) => {
+											let option = opt.trim();
+											if(option !== "") return <option key={option.toString()} value={option}>{option}</option>
+										}
+									)
+									:
+									<option value="0">choose...</option>
+								}
 							</select>;
 				helpText = "allow the user to select an option from the drop-down list";
 	

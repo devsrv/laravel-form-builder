@@ -1,11 +1,17 @@
 import React, { Component }  from 'react';
 
 class DropdownOptions extends Component {
+    handleChange = (e) => {
+        this.props.onOptionsChange(e.target.value);
+    }
+
     render() {
+        const { currOptions } = this.props;
+
         return (
             <div className="form-group">
                 <label htmlFor="dropdown-options">Comma Seperated Options</label>
-                <textarea className="form-control" id="dropdown-options" rows="3"></textarea>
+                <textarea className="form-control" id="dropdown-options" rows="3" value={currOptions} onChange={this.handleChange}></textarea>
             </div>
         )
     }
@@ -55,7 +61,7 @@ export default class ConfigForm extends Component {
         isRequired: false,
         allowDataFill: true,
         inputType: "text",
-        listOptions: [],
+        listOptions: "",
         textAreaRows: 4
     }
 
@@ -96,13 +102,17 @@ export default class ConfigForm extends Component {
         this.setState({textAreaRows: rows});
     }
 
+    handleOptionsChange = (options) => {
+        this.setState({listOptions: options});
+    }
+
     handleFormSubmit = (id, e) => {
         const {label, isRequired, inputType, textAreaRows, listOptions} = this.state;
         let additionalConfig;
         
         switch (this.props.field.type) {
             case "select":
-                additionalConfig = {listOptions};
+                additionalConfig = {listOptions: listOptions.split(",")};
                 break;
         
             case "textarea":
@@ -130,7 +140,7 @@ export default class ConfigForm extends Component {
 
         switch (fieldType) {
             case "select":
-                extraConfigs = <DropdownOptions />
+                extraConfigs = <DropdownOptions onOptionsChange={this.handleOptionsChange} currOptions={this.state.listOptions} />
 
                 break;
 
