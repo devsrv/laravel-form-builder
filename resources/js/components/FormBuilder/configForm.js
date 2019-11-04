@@ -25,12 +25,20 @@ class TextareaRows extends Component {
 }
 
 class InputFieldType extends Component {
+    handleChange = (e) => {
+        if(e.target.checked) {
+            this.props.onTypeSelect(this.props.type);
+        }
+    }
+
     render() {
-        const { label, type } = this.props;
+        const { label, type, checked } = this.props;
 
         return (
             <div className="custom-control custom-radio custom-control-inline">
-                <input type="radio" className="custom-control-input" id={`type-${type}`} name="input-type" />
+                <input type="radio" className="custom-control-input" id={`type-${type}`} name="input-type" checked={checked}
+                    onChange={this.handleChange}
+                />
                 <label className="custom-control-label" htmlFor={`type-${type}`}>{ label }</label>
             </div>
         )
@@ -41,16 +49,20 @@ export default class ConfigForm extends Component {
     state = {
         label: "",
         isRequired: false,
-        allowDataFill: true
+        allowDataFill: true,
+        inputType: "text",
+        listOptions: [],
+        textAreaRows: 4
     }
 
     static getDerivedStateFromProps(props, state) {
         if(props.show && state.allowDataFill) {
-            const { label, isRequired } = props.field;
+            const { label, isRequired, additionalConfig } = props.field;
 
             return {
                 label, 
                 isRequired,
+                ...additionalConfig,
                 allowDataFill: false
             };
         }
@@ -72,12 +84,31 @@ export default class ConfigForm extends Component {
         this.setState({isRequired: e.target.checked});
     }
 
+    handleTypeSelect = (type) => {
+        this.setState({inputType: type});
+    }
+
     handleFormSubmit = (id, e) => {
-        const {label, isRequired} = this.state;
+        const {label, isRequired, inputType, textAreaRows, listOptions} = this.state;
+        let additionalConfig;
         
+        switch (this.props.field.type) {
+            case "select":
+                additionalConfig = {listOptions};
+                break;
+        
+            case "textarea":
+                additionalConfig = {textAreaRows};
+                break;
+        
+            default:
+                additionalConfig = {inputType};
+                break;
+        }
+
         this.props.onConfigSubmit({
             id, 
-            payload: {label, isRequired}
+            payload: {label, isRequired, additionalConfig}
         });
 
         this.props.onCloseClick();
@@ -102,9 +133,9 @@ export default class ConfigForm extends Component {
         
             default:
                 extraConfigs = <div className="form-group">
-                                    <InputFieldType label="Normal Text" type="text" />
-                                    <InputFieldType label="Email" type="email" />
-                                    <InputFieldType label="Phone" type="phone" />
+                                    <InputFieldType label="Normal Text" type="text" checked={this.state.inputType == "text"} onTypeSelect={this.handleTypeSelect} />
+                                    <InputFieldType label="Email" type="email" checked={this.state.inputType == "email"} onTypeSelect={this.handleTypeSelect} />
+                                    <InputFieldType label="Phone" type="phone" checked={this.state.inputType == "phone"} onTypeSelect={this.handleTypeSelect} />
                                 </div>
 
                 break;
