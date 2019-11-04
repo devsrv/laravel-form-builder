@@ -132,10 +132,23 @@ export default class ConfigForm extends Component {
                 break;
         
             default:
+                let allowedTypes = [
+                    {id: 1, label: "Normal Text", type: "text"},
+                    {id: 2, label: "Email", type: "email"},
+                    {id: 3, label: "Phone", type: "phone"}
+                ];
+
                 extraConfigs = <div className="form-group">
-                                    <InputFieldType label="Normal Text" type="text" checked={this.state.inputType == "text"} onTypeSelect={this.handleTypeSelect} />
-                                    <InputFieldType label="Email" type="email" checked={this.state.inputType == "email"} onTypeSelect={this.handleTypeSelect} />
-                                    <InputFieldType label="Phone" type="phone" checked={this.state.inputType == "phone"} onTypeSelect={this.handleTypeSelect} />
+                                    {   allowedTypes.map((item) => {
+                                        return <InputFieldType 
+                                            key={item.id}
+                                            label={item.label} 
+                                            type={item.type} 
+                                            checked={this.state.inputType == item.type} 
+                                            onTypeSelect={this.handleTypeSelect} 
+                                            />
+                                        })
+                                    }
                                 </div>
 
                 break;
