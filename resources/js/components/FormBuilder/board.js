@@ -7,7 +7,8 @@ import { Modal, ModalBody } from './configModal';
 export default class Board extends Component {
     state = {
         fields: [],
-        showConfigModal: false
+        showConfigModal: false,
+        currConfigField: null
     }
 
     // handle user click field config / remove field
@@ -16,8 +17,7 @@ export default class Board extends Component {
 
         switch (payload.trigger) {
             case "SHOW_CONFIG_MODAL":
-                this.setState({showConfigModal: true});
-                console.log('modal show', id);
+                this.setState({showConfigModal: true, currConfigField: {...payload.field}});
                 break;
         
             default:
@@ -43,7 +43,7 @@ export default class Board extends Component {
     }
 
     handleModalCloseAttempt = () => {
-        this.setState({showConfigModal: false});
+        this.setState({showConfigModal: false, currConfigField: null});
     }
 
     render() {
@@ -74,7 +74,7 @@ export default class Board extends Component {
                         <Modal>
                             <ModalBody 
                                 show={this.state.showConfigModal}
-                                fname="Sourav" 
+                                field={this.state.currConfigField}
                                 onCloseClick={this.handleModalCloseAttempt} 
                             />
                         </Modal>
