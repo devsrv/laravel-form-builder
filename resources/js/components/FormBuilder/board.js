@@ -1,7 +1,7 @@
 import React, { Component }  from 'react';
 import { Container, Draggable } from 'react-smooth-dnd';
 import { applyDrag } from './utils';
-import { genField } from './field';
+import { TheField } from './field';
 
 export default class Board extends Component {
     constructor() {
@@ -30,7 +30,7 @@ export default class Board extends Component {
                                         <Draggable key={i}>
                                             <div className="draggable-board-item">
                                                 <span className="column-drag-handle" style={{float:'left', padding:'0 10px'}}>&#x2630;</span>
-                                                {genField(fld, true)}
+                                                {<TheField field={fld} isBoard={true} />}
                                             </div>
                                         </Draggable>
                                     );

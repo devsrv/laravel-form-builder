@@ -1,7 +1,7 @@
 import React, { Component }  from 'react';
 import { Container, Draggable } from 'react-smooth-dnd';
 import { applyDrag } from './utils';
-import { genField } from './field';
+import { TheField } from './field';
 
 export default class Pallet extends Component {
 	constructor() {
@@ -31,7 +31,7 @@ export default class Pallet extends Component {
 										<div className="draggable-pallet-item">
 											<span className="column-drag-handle" style={{float:'left', padding:'0 10px'}}>&#x2630;</span>
 											
-											{genField(fld)}
+											{<TheField field={fld} isBoard={false} />}
 										</div>
 									</Draggable>
 								);
