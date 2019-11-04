@@ -1,12 +1,19 @@
 import React, { Component }  from 'react';
 
-const FieldControls = () => {
-    return (
-        <span>
-            <button className="btn btn-light btn-sm"><i className="fa fa-wrench"></i></button> 
-            <button className="btn btn-light text-danger btn-sm ml-3" type="button"><i className="fa fa-times-circle"></i></button>
-        </span>
-    )
+class FieldControls extends Component{
+	render() {
+		return (
+			<span>
+				<button className="btn btn-light btn-sm" type="button" onClick={() => console.log('config')}>
+					<i className="fa fa-wrench"></i>
+				</button> 
+
+				<button className="btn btn-light text-danger btn-sm ml-3" type="button" onClick={() => console.log('delete')}>
+					<i className="fa fa-times-circle"></i>
+				</button>
+			</span>
+		)
+	}
 }
 
 export class TheField extends Component {
@@ -55,7 +62,7 @@ export class TheField extends Component {
 					<span>{label}</span>
 					{isBoard && <FieldControls />} 
 				</label>
-				
+
 				{fieldMarkup}
 
 				{! isBoard && <small className="form-text text-muted">{helpText}</small>}
