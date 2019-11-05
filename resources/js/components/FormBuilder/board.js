@@ -1,4 +1,5 @@
 import React, { Component }  from 'react';
+import axios from 'axios';
 import { Container, Draggable } from 'react-smooth-dnd';
 import { applyDrag } from './utils';
 import { TheField } from './field';
@@ -19,14 +20,24 @@ export default class Board extends Component {
                     return;
                 }
                 
-                //ajax with this.state.fields
+                const reactThis = this;
 
-                //ajax success
-                this.props.onSaveEnd({success: true, msg: "Your form is successfully saved", payload: this.state.fields});
-                this.setState({ fields: [] });
-
-                //ajax error
-                // this.props.onSaveEnd({success: false, msg: "Can't save data to server", payload: this.state.fields});
+                axios.post(`${_rav.save_route}`, {
+                    form_fields_data: JSON.stringify(reactThis.state.fields)
+                })
+                .then(function (response) {
+                    if(parseInt(response.data.success) === 1) {
+                        reactThis.props.onSaveEnd({success: true, msg: "Your form is successfully saved", payload: reactThis.state.fields});
+                        reactThis.setState({ fields: [] });
+                    }
+                    else {
+                        reactThis.props.onSaveEnd({success: false, msg: "Can't save data to server", payload: reactThis.state.fields});
+                    }
+                })
+                .catch(function (error) {
+                    // console.log(error);
+                    reactThis.props.onSaveEnd({success: false, msg: "Can't save data to server", payload: reactThis.state.fields});
+                });
             }
         }
     }
