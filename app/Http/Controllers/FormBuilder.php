@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\{Form, FormField};
+use App\Mail\FormSubmitted;
 
 class FormBuilder extends Controller
 {
@@ -80,11 +81,7 @@ class FormBuilder extends Controller
             ];
         });
 
-        $data = [
-            'title' => 'form data',
-            'form_data' => $form_data
-        ];
 
-        return view('show-data', $data);
+        return new FormSubmitted($form_data);
     }
 }
