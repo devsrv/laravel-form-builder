@@ -25,4 +25,8 @@
 
 @push('scripts')
     <script src="{{ asset('js/formbuilder/main.js') }}"></script>
+    <script>
+        window._rav = window._rav || {};
+        _rav.save_route = "{{ route('save.form') }}"
+    </script>
 @endpush

@@ -84,4 +84,52 @@ class FormBuilder extends Controller
 
         return new FormSubmitted($form_data);
     }
+
+    /**
+     * handle form data ajax request save
+     */
+    public function saveForm(Request $request) {
+        $request->validate([
+            'form_fields_data' => 'required|json'
+        ]);
+
+        $field_data = collect(json_decode($request->form_fields_data));
+
+        $config = $field_data->map(function($field){
+            switch ($field->type) {
+                case 'input':
+                    $additional_config = ['type' => $field->additionalConfig->inputType];
+                    break;
+                
+                case 'select':
+                    $values = collect($field->additionalConfig->listOptions)->map(function($opt){
+                        return trim($opt);
+                    })->implode(',');
+
+                    $additional_config = ['values' => $values];
+                    break;
+                
+                case 'textarea':
+                    $additional_config = ['rows' => $field->additionalConfig->textAreaRows];
+                    break;
+                
+                default:
+                    $additional_config = [];
+                    break;
+            }
+
+            $common_data = [
+                'label' => $field->label,
+                'validation' => [
+                    'required' => $field->isRequired ? 1 : 0
+                ]
+            ];
+
+            return array_merge($common_data, $additional_config);
+        });
+
+        return response()->json([
+            'success' => 1
+        ]);
+    }
 }
