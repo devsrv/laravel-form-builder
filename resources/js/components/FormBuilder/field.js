@@ -63,7 +63,7 @@ export class TheField extends Component {
 				break;
 		
 			default:
-				fieldMarkup = <input type="email" className={fieldClass} aria-describedby={`palletInputHelp${field.id}`} placeholder="" />;
+				fieldMarkup = <input type={field.additionalConfig.inputType} className={fieldClass} aria-describedby={`palletInputHelp${field.id}`} placeholder="" />;
 				helpText = "used for normal text input, email or phone number field";
 	
 				break;
