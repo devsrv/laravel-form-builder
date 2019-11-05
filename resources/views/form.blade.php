@@ -13,6 +13,7 @@
                         <form action="{{ route('submit.form') }}" method="post">
                             @csrf
                             <input type="hidden" name="form_id" value="{{ $form_id }}" />
+                            <input type="hidden" name="field_ids" value="{{ $field_ids }}" />
 
                             @foreach($fields as $field)
                                 @php
