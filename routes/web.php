@@ -14,3 +14,5 @@
 Route::get('/', function () {
     return view('builder', ['title' => 'form builder']);
 });
+
+Route::get('/show-form', 'FormBuilder@showForm')->name('show.form');
