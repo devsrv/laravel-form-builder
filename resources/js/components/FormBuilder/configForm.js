@@ -162,7 +162,7 @@ export default class ConfigForm extends Component {
                 let allowedTypes = [
                     {id: 1, label: "Normal Text", type: "text"},
                     {id: 2, label: "Email", type: "email"},
-                    {id: 3, label: "Phone", type: "phone"}
+                    {id: 3, label: "Phone", type: "number"}
                 ];
 
                 extraConfigs = <div className="form-group">
