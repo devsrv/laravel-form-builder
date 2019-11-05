@@ -10,7 +10,10 @@
             <div class="col-8 offset-2">
                 <div class="card bg-light mb-3">
                     <div class="card-body">
-                        <form>
+                        <form action="{{ route('submit.form') }}" method="post">
+                            @csrf
+                            <input type="hidden" name="form_id" value="{{ $form_id }}" />
+
                             @foreach($fields as $field)
                                 @php
                                     $options = $field->pivot->options? json_decode($field->pivot->options) : null;
@@ -26,7 +29,7 @@
                                     @switch($field->field_type)
                                         @case("select")
                                             <select id="{{ $id_for }}" name={{ $field_name }} class="custom-select">
-                                                <option selected>Choose...</option>
+                                                <option value="0" selected>Choose...</option>
                                                 @foreach(explode(",", $options->values) as $value)
                                                 <option value="{{ $value }}">{{ $value }}</option>
                                                 @endforeach

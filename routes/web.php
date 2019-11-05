@@ -16,3 +16,4 @@ Route::get('/', function () {
 });
 
 Route::get('/show-form', 'FormBuilder@showForm')->name('show.form');
+Route::post('/submit-form', 'FormBuilder@handleFormRequest')->name('submit.form');
