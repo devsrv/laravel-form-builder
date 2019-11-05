@@ -12,34 +12,46 @@ import './../../../css/builder.css';
 
 class App extends Component {
 	state = {
-		showSuccess: false,
+		notification: {
+			show: false, type: "success", msg: ""
+		},
 		saveForm: false
 	}
 
 	handleFormSave = () => {
-		this.setState({saveForm: true, showSuccess: false});
+		this.setState((state, props) => {
+			return {saveForm: true, notification: Object.assign({...state.notification}, {show: false})};
+		});
 	}
 
 	handleMsgBoxClose = () => {
-		this.setState({showSuccess: false});
+		this.setState((state, props) => {
+			return {notification: Object.assign({...state.notification}, {show: false})};
+		});
 	}
 
-	handleSaveSuccess = (payload) => {
-		// ajax here
-		console.log(payload);
-		
-		this.setState({showSuccess: true, saveForm: false});
+	handleComplete = ({success, msg}) => {
+		if(success) {
+			this.setState((state, props) => {
+				return {saveForm: false, notification: Object.assign({...state.notification}, {show: true, type: "success", msg})};
+			});
+		}
+		else {
+			this.setState((state, props) => {
+				return {saveForm: false, notification: Object.assign({...state.notification}, {show: true, type: "warning", msg})};
+			});
+		}
 	}
 
 	render() {
 		return (
 			<ErrorBoundary>
-				<Board initSave={this.state.saveForm} onSaveSuccess={this.handleSaveSuccess} />
+				<Board initSave={this.state.saveForm} onSaveEnd={this.handleComplete} />
 				<Pallet />
 
 				<SaveBtnArea 
 					onFormSave={this.handleFormSave} 
-					showSuccess={this.state.showSuccess} 
+					notification={this.state.notification} 
 					onMsgBoxClose={this.handleMsgBoxClose}
 				/>
 			</ErrorBoundary>

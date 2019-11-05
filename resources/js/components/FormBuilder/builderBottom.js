@@ -1,12 +1,14 @@
 import React, { Component }  from 'react';
 
 const NotifyBox = (props) => {
+	const { show, type, msg } = props.notification;
+
 	return (
-		props.show?
+		show?
 		<div className="col">
-			<div className="alert alert-success alert-dismissible fade show" role="alert">
-				<h4 className="alert-heading">Well done!</h4>
-				<p>Your form is successfully saved.</p>
+			<div className={`alert alert-${type} alert-dismissible fade show`} role="alert">
+				<h4 className="alert-heading">{type == "success"? "Well done " : "Oops "}!</h4>
+				<p>{msg}.</p>
 				<hr/>
 				<p className="mb-0">you can check the form here <a href="#">link</a>.</p>
 
@@ -32,7 +34,7 @@ const SaveBtnArea = (props) => {
                         Save The Form</button>
 					</div>
 
-					<NotifyBox show={props.showSuccess} onNotifMsgClose={() => props.onMsgBoxClose()} />
+					<NotifyBox notification={props.notification} onNotifMsgClose={() => props.onMsgBoxClose()} />
 				</div>
 			</div>
 		</div>
