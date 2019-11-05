@@ -14,16 +14,18 @@
                             @foreach($fields as $field)
                                 @php
                                     $options = $field->pivot->options? json_decode($field->pivot->options) : null;
+                                    $field_name = 'field_' . $field->pivot->id;
+                                    $id_for = 'input-fld-'. $loop->iteration;
                                 @endphp
 
                                 <div class="form-group">
-                                    @if($options)
-                                        <label for="input-fld-{{ $loop->iteration }}">{{ $options->label }}</label>
+                                    @if($options->label)
+                                        <label for="{{ $id_for }}">{{ $options->label }}</label>
                                     @endif
 
                                     @switch($field->field_type)
                                         @case("select")
-                                            <select id="input-fld-{{ $loop->iteration }}" class="custom-select">
+                                            <select id="{{ $id_for }}" name={{ $field_name }} class="custom-select">
                                                 <option selected>Choose...</option>
                                                 @foreach(explode(",", $options->values) as $value)
                                                 <option value="{{ $value }}">{{ $value }}</option>
@@ -32,11 +34,11 @@
                                             @break
 
                                         @case("textarea")
-                                            <textarea class="form-control" id="input-fld-{{ $loop->iteration }}" rows={{ $options->rows }}></textarea>
+                                            <textarea class="form-control" id="{{ $id_for }}" name={{ $field_name }} rows={{ $options->rows }}></textarea>
                                             @break
 
                                         @default
-                                            <input type="{{ $options->type }}" class="form-control" id="input-fld-{{ $loop->iteration }}" />
+                                            <input type="{{ $options->type }}" class="form-control" name={{ $field_name }} id="{{ $id_for }}" />
                                             
                                     @endswitch
                                 </div>
