@@ -44,13 +44,23 @@ class FormBuilder extends Controller
 
         $field_required_rules = collect($field_map_ids)->mapWithKeys(function($id){
             $field_options = FormField::findOrFail($id)->options;
-            if($field_options->validation->required == 1) return ['field_'. $id => 'required'];
-            else return ['field_'. $id => 'nullable'];
+            if($field_options->validation->required == 1) {
+                $rules = ['required'];
+                if(isset($field_options->type) && $field_options->type == "email") $rules[] = 'email';
+
+                return [
+                    'field_'. $id => implode("|", $rules)
+                ];
+            }
+            else {
+                return ['field_'. $id => 'nullable'];
+            }
         });
 
         // validation based on dynamic data
         $dynamic_validator = Validator::make($request->all(), $field_required_rules->toArray(), [
-            'required' => "field can't be left blank"
+            'required' => "field can't be left blank",
+            'email' => 'field must be a valid email address'
         ]);
 
         if ($dynamic_validator->fails()) {
