@@ -17,14 +17,7 @@ class FormBuilder extends Controller
             'title' => 'the form',
             'fields' => $the_form->fields()->get()
         ];
-        
-        return view('form', $data);
 
-        /*
-        $json = json_encode(['label' => 'abc', 'other' => 'def']);
-        // Form::find(1)->fields()->attach(3, ['options' => $json]);
-        // Form::find(1)->fields()->get()->dd();
-        // FormField::where('id', 3)->update(['options->label' => 'hello']);
-        */
+        return view('form', $data);
     }
 }

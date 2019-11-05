@@ -13,6 +13,6 @@ class Form extends Model
      */
     public function fields()
     {
-        return $this->belongsToMany('App\Field', 'form_fields')->withPivot('options');
+        return $this->belongsToMany('App\Field', 'form_fields')->withPivot('id', 'options');
     }
 }
