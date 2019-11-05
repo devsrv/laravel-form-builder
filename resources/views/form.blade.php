@@ -36,7 +36,7 @@
                                     @switch($field->field_type)
                                         @case("select")
                                             <select id="{{ $id_for }}" name={{ $field_name }} class="custom-select @error($field_name) is-invalid @enderror">
-                                                <option value="0">Choose...</option>
+                                                <option value="">Choose...</option>
                                                 @foreach(explode(",", $options->values) as $value)
                                                 <option value="{{ trim($value) }}" {{ old($field_name) == trim($value)? "selected" : "" }}>{{ trim($value) }}</option>
                                                 @endforeach
