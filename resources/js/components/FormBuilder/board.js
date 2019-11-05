@@ -15,18 +15,18 @@ export default class Board extends Component {
         if(prevProps.initSave != this.props.initSave) {
             if(this.props.initSave) {
                 if(this.state.fields.length === 0) {
-                    this.props.onSaveEnd({success: false, msg: "There is nothing to save"});
+                    this.props.onSaveEnd({success: false, msg: "There is nothing to save", payload: []});
                     return;
                 }
                 
                 //ajax with this.state.fields
 
                 //ajax success
-                this.props.onSaveEnd({success: true, msg: "Your form is successfully saved"});
+                this.props.onSaveEnd({success: true, msg: "Your form is successfully saved", payload: this.state.fields});
                 this.setState({ fields: [] });
 
                 //ajax error
-                // this.props.onSaveEnd({success: false, msg: "Can't save data to server"});
+                // this.props.onSaveEnd({success: false, msg: "Can't save data to server", payload: this.state.fields});
             }
         }
     }

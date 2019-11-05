@@ -26,7 +26,7 @@ class TextareaRows extends Component {
         return (
             <div className="form-group row">
                 <label htmlFor="no-rows" className="col-sm-4 col-form-label">Number of rows</label>
-                <div class="col-sm-6">
+                <div className="col-sm-6">
                     <input type="number" min="1" className="form-control" id="no-rows" value={this.props.currRows} onChange={this.handleChange} />
                 </div>
             </div>

@@ -13,46 +13,54 @@ import './../../../css/builder.css';
 class App extends Component {
 	state = {
 		notification: {
-			show: false, type: "success", msg: ""
+			show: false, type: "", msg: ""
 		},
-		saveForm: false
+		saveForm: false,
+		formData: ""
 	}
 
 	handleFormSave = () => {
-		this.setState((state, props) => {
-			return {saveForm: true, notification: Object.assign({...state.notification}, {show: false})};
+		this.setState((state) => {
+			return {
+				saveForm: true, 
+				notification: Object.assign({...state.notification}, {show: false})
+			};
 		});
 	}
 
 	handleMsgBoxClose = () => {
-		this.setState((state, props) => {
-			return {notification: Object.assign({...state.notification}, {show: false})};
+		this.setState((state) => {
+			return {
+				notification: Object.assign({...state.notification}, {show: false})
+			};
 		});
 	}
 
-	handleComplete = ({success, msg}) => {
-		if(success) {
-			this.setState((state, props) => {
-				return {saveForm: false, notification: Object.assign({...state.notification}, {show: true, type: "success", msg})};
-			});
-		}
-		else {
-			this.setState((state, props) => {
-				return {saveForm: false, notification: Object.assign({...state.notification}, {show: true, type: "warning", msg})};
-			});
-		}
+	handleComplete = ({success, msg, payload}) => {
+		const type = success? "success" : "warning";
+
+		this.setState((state) => {
+			return {
+				saveForm: false, 
+				formData: JSON.stringify(payload),  
+				notification: Object.assign({...state.notification}, {show: true, type, msg})
+			};
+		});
 	}
 
 	render() {
+		const { saveForm, notification, formData } = this.state;
+
 		return (
 			<ErrorBoundary>
-				<Board initSave={this.state.saveForm} onSaveEnd={this.handleComplete} />
+				<Board initSave={saveForm} onSaveEnd={this.handleComplete} />
 				<Pallet />
 
 				<SaveBtnArea 
 					onFormSave={this.handleFormSave} 
-					notification={this.state.notification} 
+					notification={notification} 
 					onMsgBoxClose={this.handleMsgBoxClose}
+					formData={formData}
 				/>
 			</ErrorBoundary>
 		);
