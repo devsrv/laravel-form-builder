@@ -49,7 +49,9 @@ class FormBuilder extends Controller
         });
 
         // validation based on dynamic data
-        $dynamic_validator = Validator::make($request->all(), $field_required_rules->toArray());
+        $dynamic_validator = Validator::make($request->all(), $field_required_rules->toArray(), [
+            'required' => "field can't be left blank"
+        ]);
 
         if ($dynamic_validator->fails()) {
             return redirect()->back()
