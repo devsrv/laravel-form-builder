@@ -1,0 +1,21 @@
+# [Form Builder (Laravel & React)](https://github.com/devsrv/laravel-form-builder)
+
+#### Setup Guide:
+- `git clone https://github.com/devsrv/laravel-form-builder.git`
+- `composer install`
+- create database & enter its details in the `.env` file ( _line 9 to 14_ ) located in the root
+```php DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=formbuilder
+DB_USERNAME=root
+DB_PASSWORD=
+```
+- `php artisan migrate:fresh --seed`
+- `php artisan serve`
+- visit `http://127.0.0.1:8000/`
+
+
+![App screen 1](https://i.imgur.com/eyc8qbv.png)
+![App screen 1](https://i.imgur.com/9zuUU0U.png)
+![App screen 1](https://i.imgur.com/wAXMEfy.png)
