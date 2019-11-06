@@ -61,7 +61,7 @@ export default class ConfigForm extends Component {
         isRequired: false,
         allowDataFill: true,
         inputType: "text",
-        dropdownOptions: "",
+        listOptions: "",
         textAreaRows: 3
     }
 
@@ -103,16 +103,16 @@ export default class ConfigForm extends Component {
     }
 
     handleOptionsChange = (options) => {
-        this.setState({dropdownOptions: options});
+        this.setState({listOptions: options});
     }
 
     handleFormSubmit = (id, e) => {
-        const {label, isRequired, inputType, textAreaRows, dropdownOptions} = this.state;
+        const {label, isRequired, inputType, textAreaRows, listOptions} = this.state;
         let additionalConfig;
         
         switch (this.props.field.type) {
             case "select":
-                additionalConfig = {listOptions: dropdownOptions.split(",")};
+                additionalConfig = {listOptions};
                 break;
         
             case "textarea":
@@ -144,7 +144,7 @@ export default class ConfigForm extends Component {
 
         switch (fieldType) {
             case "select":
-                extraConfigs = <DropdownOptions onOptionsChange={this.handleOptionsChange} currOptions={this.state.dropdownOptions} />
+                extraConfigs = <DropdownOptions onOptionsChange={this.handleOptionsChange} currOptions={this.state.listOptions} />
 
                 break;
 

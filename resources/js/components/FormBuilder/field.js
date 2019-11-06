@@ -36,7 +36,7 @@ export class TheField extends Component {
 				fieldMarkup = <select className={fieldClass}>
 								{
 									isBoard ?
-									field.additionalConfig.listOptions.map((opt) => {
+									field.additionalConfig.listOptions.split(",").map((opt) => {
 											let option = opt.trim();
 											if(option !== "") return <option key={option.toString()} value={option}>{option}</option>
 										}
