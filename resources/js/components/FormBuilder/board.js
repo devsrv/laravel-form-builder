@@ -28,7 +28,7 @@ export default class Board extends Component {
                 .then(function (response) {
                     if(parseInt(response.data.success) === 1) {
                         reactThis.props.onSaveEnd({success: true, msg: "Your form is successfully saved", payload: reactThis.state.fields});
-                        reactThis.setState({ fields: [] });
+                        // reactThis.setState({ fields: [] });
                     }
                     else {
                         reactThis.props.onSaveEnd({success: false, msg: "Can't save data to server", payload: reactThis.state.fields});
