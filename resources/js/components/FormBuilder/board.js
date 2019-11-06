@@ -99,7 +99,7 @@ export default class Board extends Component {
                 <div className="card bg-light mb-3">
                     <div className="card-header">BUILDER BOARD</div>
                     <div className="card-body">
-                        <div className="d-flex justify-content-start">
+                        <div className="d-flex justify-content-start" style={{minHeight: "200px"}}>
                             <Container groupName="1" lockAxis="y" dragHandleSelector=".column-drag-handle" getChildPayload={i => this.state.fields[i]} onDrop={e => this.setState({ fields: applyDrag(this.state.fields, e) })}>
                             {
                                 this.state.fields.map((fld) => {
