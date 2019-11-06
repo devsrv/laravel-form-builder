@@ -11,4 +11,4 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.react('resources/js/components/FormBuilder/main.js', 'public/js/formbuilder').sourceMaps();
+mix.react('resources/js/components/FormBuilder/main.js', 'public/js/formbuilder');
