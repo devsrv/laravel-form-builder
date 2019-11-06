@@ -17,5 +17,5 @@ DB_PASSWORD=
 
 
 ![App screen 1](https://i.imgur.com/eyc8qbv.png)
-![App screen 1](https://i.imgur.com/9zuUU0U.png)
-![App screen 1](https://i.imgur.com/wAXMEfy.png)
+![App screen 2](https://i.imgur.com/M7KcFJZ.png)
+![App screen 1](https://i.imgur.com/nvHo57o.png)
