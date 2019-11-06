@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use App\{Form, FormField};
+use Illuminate\Support\Facades\{Validator, DB};
+use App\{Form, FormField, Field};
 use App\Mail\FormSubmitted;
 
 class FormBuilder extends Controller
@@ -93,15 +93,24 @@ class FormBuilder extends Controller
             'form_fields_data' => 'required|json'
         ]);
 
+        $fields = Field::all()->mapWithKeys(function ($field) {
+            return [$field->id => $field->field_type];
+        });
+
+        // data from ajax request
         $field_data = collect(json_decode($request->form_fields_data));
 
-        $config = $field_data->map(function($field){
+        $config = $field_data->map(function($field) use ($fields){
             switch ($field->type) {
                 case 'input':
+                    $field_id = $fields->search('input');
+
                     $additional_config = ['type' => $field->additionalConfig->inputType];
                     break;
                 
                 case 'select':
+                    $field_id = $fields->search('select');
+
                     $values = collect($field->additionalConfig->listOptions)->map(function($opt){
                         return trim($opt);
                     })->implode(',');
@@ -110,10 +119,18 @@ class FormBuilder extends Controller
                     break;
                 
                 case 'textarea':
+                    $field_id = $fields->search('textarea');
+
                     $additional_config = ['rows' => $field->additionalConfig->textAreaRows];
                     break;
                 
+                case 'date':
+                    $field_id = $fields->search('input');
+                    $additional_config = ['type' => 'date'];
+                    break;
+                
                 default:
+                    $field_id = 0;
                     $additional_config = [];
                     break;
             }
@@ -125,11 +142,29 @@ class FormBuilder extends Controller
                 ]
             ];
 
-            return array_merge($common_data, $additional_config);
+            return ['field' => $field_id, 'options' => array_merge($common_data, $additional_config)];
+        });
+
+        // attempt data save
+        $save_success = 1;
+
+        DB::transaction(function () use ($config) {
+            try {
+                Form::findOrFail(1)->fields()->detach();
+
+                $config->each(function($item){
+                    Form::findOrFail(1)->fields()->attach($item['field'], 
+                    [
+                        'options' => json_encode($item['options'])
+                    ]);
+                });
+            } catch (Exception $e) {
+                $save_success = 0;
+            }
         });
 
         return response()->json([
-            'success' => 1
+            'success' => $save_success
         ]);
     }
 }
