@@ -60,6 +60,7 @@ class App extends Component {
 					onFormSave={this.handleFormSave} 
 					notification={notification} 
 					onMsgBoxClose={this.handleMsgBoxClose}
+					disableBtn={saveForm}
 					formData={formData}
 				/>
 			</ErrorBoundary>

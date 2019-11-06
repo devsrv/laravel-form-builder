@@ -31,7 +31,8 @@ const SaveBtnArea = (props) => {
 				<div className="row">
 					<div className="col-6 offset-3">
                         <button type="button" className="btn btn-secondary btn-lg btn-block"
-                            onClick={() => props.onFormSave()}
+							onClick={() => props.onFormSave()}
+							disabled={props.disableBtn}
                         >
                         Save The Form</button>
 					</div>
