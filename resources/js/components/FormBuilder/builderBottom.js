@@ -9,10 +9,10 @@ const NotifyBox = (props) => {
 			<div className={`alert alert-${type} alert-dismissible fade show`} role="alert">
 				<h4 className="alert-heading">{type == "success"? "Well done " : "Oops "}!</h4>
 				<p>{msg}.</p>
-				<hr/>
+				{/* <hr/>
 				<p className="mb-0">
 					{props.formData}
-				</p>
+				</p> */}
 
 				<button type="button" className="close" data-dismiss="alert" aria-label="Close" onClick={() => props.onNotifMsgClose()}>
 					<span aria-hidden="true">&times;</span>
