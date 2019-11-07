@@ -2,6 +2,7 @@
 
 #### Setup Guide:
 - `git clone https://github.com/devsrv/laravel-form-builder.git`
+- `cd laravel-form-builder`
 - `composer install`
 - create database & enter its details in the `.env` file ( _line 9 to 14_ ) located in the root
 ```php DB_CONNECTION=mysql
@@ -11,7 +12,7 @@ DB_DATABASE=formbuilder
 DB_USERNAME=root
 DB_PASSWORD=
 ```
-- `php artisan migrate:fresh --seed`
+- `php artisan migrate --seed`
 - `php artisan serve`
 - visit `http://127.0.0.1:8000/`
 
