@@ -20,7 +20,7 @@ class FormBuilder extends Controller
 
         $data = [
             'title' => 'the form',
-            'fields' => $the_form->fields()->get(),
+            'fields' => $the_form->fields()->orderBy('form_fields.id', 'asc')->get(),
             'form_id' => $form_id_toshow,
             'field_ids' => implode(",", $field_map_ids)
         ];
