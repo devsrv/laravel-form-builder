@@ -72,6 +72,7 @@ export class TheField extends Component {
 				fieldMarkup = <DatePicker
                                 selected={this.state.startDate}
                                 onChange={this.handleDateChange}
+                                dateFormat="yyyy/MM/dd"
                             />;
 
 				helpText = "used for date input- resulting value includes the year, month, and day";

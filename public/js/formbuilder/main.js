@@ -81634,6 +81634,7 @@ function (_Component2) {
           fieldMarkup = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_datepicker__WEBPACK_IMPORTED_MODULE_1___default.a, {
             selected: _this.state.startDate,
             onChange: _this.handleDateChange,
+            dateFormat: "yyyy/MM/dd",
             __source: {
               fileName: _jsxFileName,
               lineNumber: 72
@@ -81650,7 +81651,7 @@ function (_Component2) {
             placeholder: "",
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 82
+              lineNumber: 83
             }
           });
           helpText = "used for normal text input, email or phone number field";
@@ -81683,31 +81684,31 @@ function (_Component2) {
         className: "form-group",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 96
+          lineNumber: 97
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: isBoard ? "d-flex justify-content-between align-items-start pb-2" : "",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 97
+          lineNumber: 98
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 98
+          lineNumber: 99
         }
       }, label), isBoard && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(FieldControls, {
         field: field,
         onBtnClick: this.handleFldControlClick,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 101
+          lineNumber: 102
         }
       })), fieldMarkup, !isBoard && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
         className: "form-text text-muted",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 107
+          lineNumber: 108
         }
       }, helpText));
     }
