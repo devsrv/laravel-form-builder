@@ -14,6 +14,12 @@
                     </div>
                 @endif
 
+                @if(session('mail_sent') == 1)
+                    <div class="alert alert-success" role="alert">
+                        <strong>Success!</strong> form data sent via email
+                    </div>
+                @endif
+
                 <div class="card bg-light mb-3">
                     <div class="card-body">
                         <form action="{{ route('submit.form') }}" method="post">

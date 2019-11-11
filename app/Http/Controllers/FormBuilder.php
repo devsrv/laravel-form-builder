@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\{Validator, DB};
+use Illuminate\Support\Facades\{Validator, DB, Mail};
 use App\{Form, FormField, Field};
 use App\Mail\FormSubmitted;
 
@@ -82,7 +82,10 @@ class FormBuilder extends Controller
         });
 
 
-        return new FormSubmitted($form_data);
+        Mail::to("manasd603@gmail.com")->send(new FormSubmitted($form_data));
+        // return new FormSubmitted($form_data);
+
+        return redirect()->back()->with('mail_sent', 1);
     }
 
     /**
@@ -107,7 +110,7 @@ class FormBuilder extends Controller
 
                     $additional_config = ['type' => $field->additionalConfig->inputType];
                     break;
-                
+
                 case 'select':
                     $field_id = $fields->search('select');
 
@@ -117,18 +120,18 @@ class FormBuilder extends Controller
 
                     $additional_config = ['values' => $values];
                     break;
-                
+
                 case 'textarea':
                     $field_id = $fields->search('textarea');
 
                     $additional_config = ['rows' => $field->additionalConfig->textAreaRows];
                     break;
-                
+
                 case 'date':
                     $field_id = $fields->search('input');
                     $additional_config = ['type' => 'date'];
                     break;
-                
+
                 default:
                     $field_id = 0;
                     $additional_config = [];
@@ -153,7 +156,7 @@ class FormBuilder extends Controller
                 Form::findOrFail(1)->fields()->detach();
 
                 $config->each(function($item){
-                    Form::findOrFail(1)->fields()->attach($item['field'], 
+                    Form::findOrFail(1)->fields()->attach($item['field'],
                     [
                         'options' => json_encode($item['options'])
                     ]);
