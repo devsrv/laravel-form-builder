@@ -54,7 +54,7 @@ export default class Board extends Component {
             default:
                 // delete the field from board
                 const fieldIndex = this.state.fields.findIndex(f => {
-                    return f.id === id.toString();
+                    return f.id.toString() === id.toString();
                 });
 
                 this.setState({

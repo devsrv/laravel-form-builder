@@ -80385,7 +80385,7 @@ function (_Component) {
         default:
           // delete the field from board
           var fieldIndex = _this.state.fields.findIndex(function (f) {
-            return f.id === id.toString();
+            return f.id.toString() === id.toString();
           });
 
           _this.setState({
