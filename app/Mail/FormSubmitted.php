@@ -30,7 +30,7 @@ class FormSubmitted extends Mailable
      */
     public function build()
     {
-        return $this->from('developer.srv1@gmail.com')
+        return $this->from('example@example.com')
                 ->markdown('emails.form-submitted');
     }
 }
