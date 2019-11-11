@@ -21,7 +21,7 @@ class FormSeeder extends Seeder
         ]);
 
         // make the options json for each field & attach to the form
-        $fields = Field::all()->map(function($field) {
+        /*$fields = Field::all()->map(function($field) {
             return ['id' => $field->id, 'type' => $field->field_type];
         });
 
@@ -39,7 +39,7 @@ class FormSeeder extends Seeder
                         ]
                     ];
                     break;
-                
+
                 case 'select':
                     $config = [
                         'label' => 'Drop-Down',
@@ -49,7 +49,7 @@ class FormSeeder extends Seeder
                         ]
                     ];
                     break;
-                
+
                 default:
                     $config = [
                         'label' => 'Input Field',
@@ -66,6 +66,6 @@ class FormSeeder extends Seeder
 
         $options->each(function($option) use ($form) {
             $form->fields()->attach($option['id'], $option['data']);
-        });
+        });*/
     }
 }

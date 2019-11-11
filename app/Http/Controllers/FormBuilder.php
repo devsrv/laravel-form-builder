@@ -13,8 +13,6 @@ class FormBuilder extends Controller
      * show the builder
      */
     public function showBuilder() {
-        $field_data = [];
-
         $fields = Field::all()->mapWithKeys(function ($field) {
             return [$field->field_type => $field->id];
         });
@@ -73,7 +71,7 @@ class FormBuilder extends Controller
 
         $data = [
             'title' => 'form builder',
-            'builder_data' => $field_data->flatten(1)->toArray()
+            'builder_data' => $builder_fields->exists()? $field_data->flatten(1)->toArray() : []
         ];
 
         return view('builder', $data);
