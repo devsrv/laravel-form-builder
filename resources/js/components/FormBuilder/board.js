@@ -7,7 +7,7 @@ import { Modal, ModalBody } from './configModal';
 
 export default class Board extends Component {
     state = {
-        fields: [],
+        fields: _rav.boardData,
         showConfigModal: false,
         currConfigField: null
     }
@@ -19,7 +19,7 @@ export default class Board extends Component {
                     this.props.onSaveEnd({success: false, msg: "There is nothing to save", payload: []});
                     return;
                 }
-                
+
                 const reactThis = this;
 
                 axios.post(`${_rav.save_route}`, {
@@ -50,13 +50,13 @@ export default class Board extends Component {
             case "SHOW_CONFIG_MODAL":
                 this.setState({showConfigModal: true, currConfigField: {...payload.field}});
                 break;
-        
+
             default:
                 // delete the field from board
                 const fieldIndex = this.state.fields.findIndex(f => {
                     return f.id === id.toString();
                 });
-    
+
                 this.setState({
                     fields: [
                         ...this.state.fields.slice(0, fieldIndex),
@@ -79,9 +79,9 @@ export default class Board extends Component {
 
     handleConfigSubmit = (data) => {
         const { id, payload } = data;
-        
+
         const fieldIndex = this.state.fields.findIndex(f => {
-            return f.id === id.toString();
+            return f.id.toString() === id.toString();
         });
 
         this.setState({
@@ -114,21 +114,21 @@ export default class Board extends Component {
                                 })
                             }
                             </Container>
-                        </div>       
+                        </div>
                     </div>
 
                     <div onClick={this.handleClick}>
                         <Modal>
-                            <ModalBody 
+                            <ModalBody
                                 show={this.state.showConfigModal}
                                 field={this.state.currConfigField}
-                                onCloseClick={this.handleModalCloseAttempt} 
+                                onCloseClick={this.handleModalCloseAttempt}
                                 onConfigSubmit={this.handleConfigSubmit}
                             />
                         </Modal>
                     </div>
                 </div>
-            </div>      
+            </div>
         );
     }
 }

@@ -80363,7 +80363,7 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Board)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
     _defineProperty(_assertThisInitialized(_this), "state", {
-      fields: [],
+      fields: _rav.boardData,
       showConfigModal: false,
       currConfigField: null
     });
@@ -80412,7 +80412,7 @@ function (_Component) {
           payload = data.payload;
 
       var fieldIndex = _this.state.fields.findIndex(function (f) {
-        return f.id === id.toString();
+        return f.id.toString() === id.toString();
       });
 
       _this.setState({
