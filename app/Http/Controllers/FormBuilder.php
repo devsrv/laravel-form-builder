@@ -10,6 +10,76 @@ use App\Mail\FormSubmitted;
 class FormBuilder extends Controller
 {
     /**
+     * show the builder
+     */
+    public function showBuilder() {
+        $field_data = [];
+
+        $fields = Field::all()->mapWithKeys(function ($field) {
+            return [$field->field_type => $field->id];
+        });
+
+        $builder_fields = FormField::where('form_id', 1)->orderBy('id', 'asc');
+        if($builder_fields->exists()) {
+            $field_data = $builder_fields->get()->map(function($field) use ($fields) {
+                switch ($fields->search($field->field_id)) {
+                    case 'select':
+                        $field_config_data = [
+                            'type'=> 'select',
+                            'additionalConfig'=> [
+                                'listOptions' => $field->options->values
+                            ]
+                        ];
+
+                        break;
+
+                    case 'textarea':
+                        $field_config_data = [
+                            'type'=> 'textarea',
+                            'additionalConfig'=> [
+                                'textAreaRows' => $field->options->rows
+                            ]
+                        ];
+
+                        break;
+
+                    default:
+                        if($field->options->type != "date") {
+                            $field_config_data = [
+                                'type'=> 'input',
+                                'additionalConfig'=> [
+                                    'inputType' => $field->options->type
+                                ]
+                            ];
+                        }
+                        else {
+                            $field_config_data = [
+                                'type'=> 'date',
+                                'additionalConfig'=> []
+                            ];
+                    }
+
+                }
+
+                $common_data = [
+                    'id' => $field->id,
+                    'label'=> $field->options->label,
+                    'isRequired'=> $field->options->validation->required == 1? true : false,
+                ];
+
+                return [array_merge($common_data, $field_config_data)];
+            });
+        }
+
+        $data = [
+            'title' => 'form builder',
+            'builder_data' => $field_data->flatten(1)->toArray()
+        ];
+
+        return view('builder', $data);
+    }
+
+    /**
      * show the form
      */
     public function showForm() {

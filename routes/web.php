@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('builder', ['title' => 'form builder']);
-})->name('app.home');
+Route::get('/', 'FormBuilder@showBuilder')->name('app.home');
 
 Route::get('/show-form', 'FormBuilder@showForm')->name('show.form');
 Route::post('/save-form', 'FormBuilder@saveForm')->name('save.form');

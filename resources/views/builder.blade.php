@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @push('styles')
-    
+
 @endpush
 
 @section('content')
@@ -13,20 +13,22 @@
             <p>create dynamic form by drag drop fields, sort field order, configure form fields, set validation rules.</p>
         </div>
     </div>
-    
+
     <div class="section">
         {{-- react app root --}}
         <div class="row" id="builder-app"></div>
 
         <div id="modal-root"></div>
     </div>
-    
+
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('js/formbuilder/main.js') }}"></script>
     <script>
         window._rav = window._rav || {};
-        _rav.save_route = "{{ route('save.form') }}"
+        _rav.save_route = "{{ route('save.form') }}";
+        _rav.boardData = @json($builder_data);
     </script>
+
+    <script src="{{ asset('js/formbuilder/main.js') }}"></script>
 @endpush
