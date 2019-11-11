@@ -150,7 +150,7 @@ class FormBuilder extends Controller
         });
 
 
-        Mail::to("manasd603@gmail.com")->send(new FormSubmitted($form_data));
+        Mail::to("kumawat.k@shim-bi.com")->send(new FormSubmitted($form_data));
         // return new FormSubmitted($form_data);
 
         return redirect()->back()->with('mail_sent', 1);
