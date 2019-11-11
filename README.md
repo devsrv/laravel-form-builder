@@ -3,7 +3,7 @@
 #### Setup Guide:
 - `git clone https://github.com/devsrv/laravel-form-builder.git`
 - `cd laravel-form-builder`
-- `composer install`
+- `composer install --no-dev`
 - create database & enter its details in the `.env` file ( _line 9 to 14_ ) located in the root
 ```php DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
